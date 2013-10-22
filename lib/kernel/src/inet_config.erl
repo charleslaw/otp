@@ -241,8 +241,10 @@ set_hostname({ok,Name}) when length(Name) > 0 ->
     inet_db:set_hostname(Host),
     set_search_dom(Domain);
 set_hostname({ok,[]}) ->
-    inet_db:set_hostname("nohost"),
-    set_search_dom("nodomain").
+    [Node | SplitDomain] = string:tokens(os:getenv("HOSTNAME"), "."),
+    Domain = string:join(SplitDomain, "."), 
+    inet_db:set_hostname(Node),
+    set_search_dom(Domain).
 
 set_search_dom([$.|Domain]) ->
     %% leading . not removed by dropwhile above.
