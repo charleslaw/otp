@@ -260,12 +260,6 @@ void run(EpmdVars *g)
 	}
 
       free(tmp);
-
-      if (!loopback_ok)
-	{
-	  SET_ADDR(iserv_addr[num_sockets],EPMD_ADDR_LOOPBACK,sport);
-	  num_sockets++;
-	}
     }
   else
     {
