@@ -29,7 +29,7 @@
 #endif
 
 #ifndef EPMD_PORT
-#define EPMD_PORT 4369
+#define EPMD_PORT 20000
 #endif
 
 #ifndef EPMDBUF

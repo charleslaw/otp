@@ -25,7 +25,8 @@
 #   4366 - Version 4.3                 TCP
 #   4368 - Version 4.4.0 - 4.6.2       TCP
 #   4369 - Version 4.6.3 - 4.7.4       TCP/UDP
-EPMD_PORT_NO=4369
+#  20000 - OpenShift                   TCP/UDP
+EPMD_PORT_NO=20000
 
 
 # ------------------------------------------------

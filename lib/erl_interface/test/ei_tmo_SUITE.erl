@@ -685,5 +685,5 @@ get_epmd_port() ->
         {ok, [[PortStr|_]|_]} when is_list(PortStr) ->
             list_to_integer(PortStr);
         error ->
-            4369 % Default epmd port
+            20000 % Default epmd port
     end.

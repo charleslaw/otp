@@ -67,7 +67,7 @@ be an EPMD running. The EPMD can be started explicitly or automatically
 as a result of the Erlang node startup.
 </p>
 <p>
-By default EPMD listens on port 4369.
+By default EPMD listens on port 20000
 </p>
 <p>
   3 and 4 are performed at the same level but the net_kernel disconnects the

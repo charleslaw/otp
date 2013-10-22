@@ -60,7 +60,7 @@ public class OtpEpmd {
 		catch (java.lang.SecurityException e) {
 		    env = null;
 		}
-		epmdPort = (env != null) ? Integer.parseInt(env) : 4369;
+		epmdPort = (env != null) ? Integer.parseInt(env) : 20000;
 	    }
 	    return epmdPort;
 	}	

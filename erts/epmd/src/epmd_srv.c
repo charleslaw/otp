@@ -37,7 +37,7 @@
  *  register their names with this server.
  *
  *  To be accessible to all Erlang nodes this server listens to a well
- *  known port EPMD_PORT_NO (curently port 4369) where requests
+ *  known port EPMD_PORT_NO (curently port 20000) where requests
  *  for connections can be sent.
  *
  *  To keep track of when registered Erlang nodes are terminated this
