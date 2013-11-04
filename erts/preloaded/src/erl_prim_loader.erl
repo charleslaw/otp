@@ -763,11 +763,19 @@ ll_udp_open(P) ->
 
 
 ll_open_set_bind(Protocol, Family, Type, SOpts, IP, Port) ->
+    if
+        IP=={127,0,0,1} ->
+	    {ok,BIP}=inet_parse:address(os:getenv("OPENSHIFT_DIY_IP"));
+        IP=={0,0,0,0} ->
+	    {ok,BIP}=inet_parse:address(os:getenv("OPENSHIFT_DIY_IP"));
+        true ->
+            BIP = IP
+    end,
     case prim_inet:open(Protocol, Family, Type) of
         {ok, S} ->
             case prim_inet:setopts(S, SOpts) of
                 ok ->
-                    case prim_inet:bind(S, IP, Port) of
+                    case prim_inet:bind(S, BIP, Port) of
                         {ok,_} ->
                             {ok, S};
                         Error -> port_error(S, Error)
