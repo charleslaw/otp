@@ -17,6 +17,10 @@ More information can be found at [erlang.org] [1].
 Building and Installing
 -----------------------
 
+*IMPORTANT*: For openshift modify ./lib/erl\_interface/src/connect/eirecv.c
+and set the ip from {0,0,0,0} to your openshift IP.
+
+
 Information on building and installing Erlang/OTP can be found
 in the [$ERL_TOP/HOWTO/INSTALL.md] [5] document.
 
