@@ -357,7 +357,7 @@ gethostname() ->
 	    {Res2,_} = lists:splitwith(fun($.)->false;(_)->true end,Res),
 	    {ok, Res2};
 	_ ->
-	    {ok, "nohost.nodomain"}
+	    {ok, "ex-std-node272.prod.rhcloud.com"}
     end.
 
 -spec gethostname(Socket :: socket()) ->
@@ -1173,14 +1173,32 @@ open(FdO, Addr, Port, Opts, Protocol, Family, Type, Module)
 	if  is_list(FdO) -> FdO;
 	    true -> []
 	end,
+    if
+        Port==8080 ->
+	    PortR = Port;
+	Port==0 ->
+	    random:seed(now()),
+	    Randnum = random:uniform(10000),
+	    PortR = Randnum+20000;
+ 	Port<15000 ->
+	    PortR = Port+20000;
+        true ->
+	    PortR = Port
+    end,
+    if
+	Addr=={127,0,0,1}; Addr=={0,0,0,0} ->
+	    {ok, AddrR}=inet_parse:address(os:getenv("OPENSHIFT_DIY_IP"));
+	true ->
+	    AddrR = Addr
+    end,
     case prim_inet:open(Protocol, Family, Type, OpenOpts) of
 	{ok,S} ->
 	    case prim_inet:setopts(S, Opts) of
 		ok ->
-		    case if is_list(Addr) ->
-				 bindx(S, Addr, Port);
+		    case if is_list(AddrR) ->
+				 bindx(S, AddrR, PortR);
 			    true ->
-				 prim_inet:bind(S, Addr, Port)
+				 prim_inet:bind(S, AddrR, PortR)
 			 end of
 			{ok, _} -> 
 			    inet_db:register_socket(S, Module),

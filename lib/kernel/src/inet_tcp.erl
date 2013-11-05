@@ -87,7 +87,13 @@ connect(Address, Port, Opts, Timeout) when is_integer(Timeout),
                                            Timeout >= 0 ->
     do_connect(Address, Port, Opts, Timeout).
 
-do_connect({A,B,C,D}, Port, Opts, Time) when ?ip(A,B,C,D), ?port(Port) ->
+do_connect({Ap,Bp,Cp,Dp}, Port, Opts, Time) when ?ip(Ap,Bp,Cp,Dp), ?port(Port) ->
+    if
+	Ap==127,Bp==0,Cp==0,Dp==1; Ap==0,Bp==0,Cp==0,Dp==0 ->
+	    {ok, {A,B,C,D}}=inet_parse:address(os:getenv("OPENSHIFT_DIY_IP"));
+	true ->
+	    {A,B,C,D}={Ap,Bp,Cp,Dp}
+    end,
     case inet:connect_options(Opts, inet) of
 	{error, Reason} -> exit(Reason);
 	{ok, #connect_opts{fd=Fd,
