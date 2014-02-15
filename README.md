@@ -18,7 +18,11 @@ Building and Installing
 -----------------------
 
 *IMPORTANT*: For openshift modify ./lib/erl\_interface/src/connect/eirecv.c
-and set the ip from {0,0,0,0} to your openshift IP.
+and set the ip from {0,0,0,0} to your openshift IP.  You can do this by
+running:
+
+sed -i 's/{0,0,0,0}/'"{${OPENSHIFT_DIY_IP//[.]/,}}"'/g'  ./lib/erl_interface/src/connect/eirecv.c
+
 
 
 Information on building and installing Erlang/OTP can be found
