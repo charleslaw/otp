@@ -76,6 +76,7 @@
 
 #if OPENSSL_VERSION_NUMBER >= 0x009080ffL \
 	&& !defined(OPENSSL_NO_EC) \
+	&& !defined(OPENSSL_NO_EC2M) \
 	&& !defined(OPENSSL_NO_ECDH) \
 	&& !defined(OPENSSL_NO_ECDSA)
 # define HAVE_EC
